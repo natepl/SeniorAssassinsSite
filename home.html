@@ -1056,9 +1056,11 @@
         const range = selection.getRangeAt(0);
         const topOffset = range.getBoundingClientRect().top + window.pageYOffset - 50;
         if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-          // If on iOS device, use scrollIntoView instead of scrollTo
-          range.startContainer.parentElement.scrollIntoView();
-          window.scrollBy(0, -50);
+          // If on iOS device, use setTimeout to scroll to the top of the found text
+          setTimeout(() => {
+            range.startContainer.parentElement.scrollIntoView();
+            window.scrollBy(0, -50);
+          }, 200);
         } else {
           window.scrollTo(0, topOffset);
         }
