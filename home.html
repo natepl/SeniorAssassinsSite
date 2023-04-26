@@ -1055,7 +1055,13 @@
         const selection = window.getSelection();
         const range = selection.getRangeAt(0);
         const topOffset = range.getBoundingClientRect().top + window.pageYOffset - 50;
-        window.scrollTo(0, topOffset);
+        if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+          // If on iOS device, use scrollIntoView instead of scrollTo
+          range.startContainer.parentElement.scrollIntoView();
+          window.scrollBy(0, -50);
+        } else {
+          window.scrollTo(0, topOffset);
+        }
       } else {
         alert(`"${searchText}" not found.`);
       }
