@@ -52,11 +52,11 @@
         </div>
     </nav>
     <div style="padding-top: 1%; justify-content: center; display: flex;">
-    <form>
-      <label for="search-box">Enter text to search:</label>
-      <input type="text" id="search-box" name="search-box">
-      <button type="button" onclick="searchAndNavigate()">Search (don't press return, click this)</button>
-    </form>
+      <form>
+        <label for="search-box">Enter text to search:</label>
+        <input type="text" id="search-box" name="search-box">
+        <button type="button" onclick="searchAndNavigate()">Search and Navigate</button>
+      </form>
   </div>
 
     <div style="justify-content: center; display: flex;">
@@ -1052,7 +1052,10 @@
     if (searchText) {
       const searchResult = window.find(searchText);
       if (searchResult) {
-        window.scrollTo(0, window.pageYOffset - 50);
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        const topOffset = range.getBoundingClientRect().top + window.pageYOffset - 50;
+        window.scrollTo(0, topOffset);
       } else {
         alert(`"${searchText}" not found.`);
       }
