@@ -52,7 +52,7 @@
         </div>
     </nav>
     <div style="padding-top: 1%; justify-content: center; display: flex;">
-      <form>
+      <form style="height:200px;">
         <label for="search-box">Enter text to search:</label>
         <input type="text" id="search-box" name="search-box">
         <button type="button" onclick="searchAndNavigate()">Search and Navigate</button>
@@ -1056,11 +1056,9 @@
         const range = selection.getRangeAt(0);
         const topOffset = range.getBoundingClientRect().top + window.pageYOffset - 50;
         if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
-          // If on iOS device, use setTimeout to scroll to the top of the found text
-          setTimeout(() => {
-            range.startContainer.parentElement.scrollIntoView();
-            window.scrollBy(0, -50);
-          }, 200);
+          // If on iOS device, use scrollIntoView instead of scrollTo
+          range.startContainer.parentElement.scrollIntoView();
+          window.scrollBy(0, -50);
         } else {
           window.scrollTo(0, topOffset);
         }
